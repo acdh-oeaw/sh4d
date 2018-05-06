@@ -1,27 +1,24 @@
 from django.contrib.gis import admin
 from leaflet.admin import LeafletGeoAdmin
-from .models import *
+from .models import TangibleObject
 
 
-class BrickAdmin(LeafletGeoAdmin):
+class TangibleObjectAdmin(LeafletGeoAdmin):
     list_display = (
-        'id',
+        'orea_gis_i',
         'excavation',
-        'stratum_id',
-        'phase_id',
+        'planum_gis',
         'archaeolog',
-        'archaeol_1',
-        'brick_type'
     )
     list_filter = [
-        'brick_type',
-        'stratum_id',
-        'archaeolog',
+        'excavation',
+        'planum_gis',
+        'stratum_gi',
     ]
     search_fields = [
-        'archaeol_1',
-        'resources_field'
+        'phase_id',
+        'find_type',
     ]
 
 
-admin.site.register(Brick, BrickAdmin)
+admin.site.register(TangibleObject, TangibleObjectAdmin)

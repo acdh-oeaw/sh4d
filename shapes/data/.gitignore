@@ -9,4 +9,4 @@
 # ...even if they are in subdirectories
 !*/
 
-python manage.py ogrinspect shapes\data\shp_EPSG4326\TD_FI_j21_Bricks.shp Brick --srid=4326 --mapping --multi --settings=sh4d.settings.pg_local
+# python manage.py ogrinspect shapes\data\shp_EPSG4326\tangible_things.shp TangibleObject --srid=4326 --mapping --multi --settings=sh4d.settings.pg_local
