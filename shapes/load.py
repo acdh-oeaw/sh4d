@@ -1,6 +1,43 @@
 import os
 from django.contrib.gis.utils import LayerMapping
-from .models import TangibleObject
+from .models import TangibleObject, Bricks
+
+
+bricks_mapping = {
+    'excavation': 'Excavation',
+    'stratum_id': 'Stratum_ID',
+    'phase_id': 'Phase_ID',
+    'archaeolog': 'Archaeolog',
+    'archaeol_1': 'Archaeol_1',
+    'brick_type': 'Brick_type',
+    'brick_mate': 'Brick_mate',
+    'height_max': 'Height_max',
+    'extrusion': 'Extrusion',
+    'base_heigh': 'Base_heigh',
+    'orientatio': 'Orientatio',
+    'resources_field': 'Resources_',
+    'shape_leng': 'SHAPE_Leng',
+    'shape_area': 'SHAPE_Area',
+    'orea_gis_i': 'OREA_GIS_I',
+    'archaeol_2': 'Archaeol_2',
+    'add_phase_field': 'Add_phase_',
+    'add_phase1': 'Add_phase1',
+    'geom': 'MULTIPOLYGON',
+}
+
+bricks_shps = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__), 'data', 'shp_EPSG4326', 'orig', 'TD_FI_j21_Bricks.shp',)
+)
+
+
+def import_bricks(verbose=True):
+    lm = LayerMapping(
+        Bricks, bricks_shps, bricks_mapping,
+        transform=True, encoding='utf-8',
+    )
+    lm.save(strict=True, verbose=verbose)
+
 
 tangibleobject_mapping = {
     'orea_gis_i': 'OREA_GIS_i',

@@ -1,6 +1,67 @@
 from django.contrib.gis.db import models
 
 
+class Bricks(models.Model):
+
+    """ defines a Brick """
+
+    excavation = models.CharField(
+        blank=True, null=True,
+        max_length=254, verbose_name="Excavation",
+        help_text="What was the excavation responsible for the discovery of this object"
+        )
+    stratum_id = models.CharField(
+        blank=True, null=True,
+        max_length=254)
+    phase_id = models.CharField(
+        blank=True, null=True,
+        max_length=254)
+    archaeolog = models.CharField(
+        blank=True, null=True,
+        max_length=254)
+    archaeol_1 = models.CharField(
+        blank=True, null=True,
+        max_length=254)
+    brick_type = models.CharField(
+        blank=True, null=True,
+        max_length=254)
+    brick_mate = models.CharField(
+        blank=True, null=True,
+        max_length=254)
+    height_max = models.FloatField(
+        blank=True, null=True)
+    extrusion = models.FloatField(
+        blank=True, null=True)
+    base_heigh = models.FloatField(
+        blank=True, null=True)
+    orientatio = models.CharField(
+        blank=True, null=True,
+        max_length=254)
+    resources_field = models.CharField(
+        blank=True, null=True,
+        max_length=254)
+    shape_leng = models.FloatField(
+        blank=True, null=True)
+    shape_area = models.FloatField(
+        blank=True, null=True)
+    orea_gis_i = models.CharField(
+        blank=True, null=True,
+        max_length=50, verbose_name="OREA_GIS_ID")
+    archaeol_2 = models.CharField(
+        blank=True, null=True,
+        max_length=100)
+    add_phase_field = models.CharField(
+        blank=True, null=True,
+        max_length=50)
+    add_phase1 = models.CharField(
+        blank=True, null=True,
+        max_length=50)
+    geom = models.MultiPolygonField(blank=True, srid=4326)
+
+    def __str__(self):
+        return "{}".format(self.orea_gis_i)
+
+
 class TangibleObject(models.Model):
 
     """ merge of polygons describing tangible objects """
