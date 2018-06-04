@@ -1,240 +1,112 @@
+from django.urls import reverse
+from django.core.serializers import serialize
 from django.contrib.gis.db import models
 
 
-class Bricks(models.Model):
-
-    """ defines a Brick """
-
-    excavation = models.CharField(
-        blank=True, null=True,
-        max_length=254, verbose_name="Excavation",
-        help_text="What was the excavation responsible for the discovery of this object"
-        )
-    stratum_id = models.CharField(
-        blank=True, null=True,
-        max_length=254)
-    phase_id = models.CharField(
-        blank=True, null=True,
-        max_length=254)
-    archaeolog = models.CharField(
-        blank=True, null=True,
-        max_length=254)
-    archaeol_1 = models.CharField(
-        blank=True, null=True,
-        max_length=254)
-    brick_type = models.CharField(
-        blank=True, null=True,
-        max_length=254)
-    brick_mate = models.CharField(
-        blank=True, null=True,
-        max_length=254)
-    height_max = models.FloatField(
-        blank=True, null=True)
-    extrusion = models.FloatField(
-        blank=True, null=True)
-    base_heigh = models.FloatField(
-        blank=True, null=True)
-    orientatio = models.CharField(
-        blank=True, null=True,
-        max_length=254)
-    resources_field = models.CharField(
-        blank=True, null=True,
-        max_length=254)
-    shape_leng = models.FloatField(
-        blank=True, null=True)
-    shape_area = models.FloatField(
-        blank=True, null=True)
-    orea_gis_i = models.CharField(
-        blank=True, null=True,
-        max_length=50, verbose_name="OREA_GIS_ID")
-    archaeol_2 = models.CharField(
-        blank=True, null=True,
-        max_length=100)
-    add_phase_field = models.CharField(
-        blank=True, null=True,
-        max_length=50)
-    add_phase1 = models.CharField(
-        blank=True, null=True,
-        max_length=50)
-    geom = models.MultiPolygonField(blank=True, srid=4326)
-
-    def __str__(self):
-        return "{}".format(self.orea_gis_i)
-
-
-class TangibleObject(models.Model):
-
-    """ merge of polygons describing tangible objects """
-
-    orea_gis_i = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    excavation = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    planum_gis = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    stratum_gi = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    stratum_id = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    phase_id = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    locus_wall = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    archaeolog = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    archaeol_1 = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    archaeol_2 = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    orientatio = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    brick_mate = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    wall_brick = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    height_top = models.FloatField(
-        blank=True, null=True,
-        help_text="provide_some"
+class CadastralCommunity(models.Model):
+    cadcom_num = models.BigIntegerField(
+        blank=True, null=True
     )
-    height_t_1 = models.FloatField(
-        blank=True, null=True,
-        help_text="provide_some"
+    cadcom_nam = models.CharField(
+        max_length=254, blank=True, null=True
     )
-    height_bot = models.FloatField(
-        blank=True, null=True,
-        help_text="provide_some"
+    cadcom_alt = models.CharField(
+        max_length=254, blank=True, null=True
     )
-    height_b_1 = models.FloatField(
-        blank=True, null=True,
-        help_text="provide_some"
+    lau2_muni_field = models.BigIntegerField(
+        blank=True, null=True
     )
-    wall_cours = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    wall_conne = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    wall_funct = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    gis_commen = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    extrusion = models.FloatField(
-        blank=True, null=True,
-        help_text="provide_some"
+    lau2_mun_1 = models.CharField(
+        max_length=254, blank=True, null=True
     )
-    base_heigh = models.FloatField(
-        blank=True, null=True,
-        help_text="provide_some"
+    polbez_num = models.BigIntegerField(
+        blank=True, null=True
     )
-    resources_field = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    shape_leng = models.FloatField(
-        blank=True, null=True,
-        help_text="provide_some"
+    polbez_nam = models.CharField(
+        max_length=254, blank=True, null=True
     )
-    shape_area = models.FloatField(
-        blank=True, null=True,
-        help_text="provide_some"
+    nuts3_code = models.CharField(
+        max_length=254, blank=True, null=True
     )
-    shape_clas = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    archaeol_3 = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    pit_find_g = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    eigner_map = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    brick_type = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    height_max = models.FloatField(
-        blank=True, null=True,
-        help_text="provide_some"
+    nuts3_name = models.CharField(
+        max_length=254, blank=True, null=True
     )
-    add_phase_field = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=50)
-    add_phase1 = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=50)
-    find_mater = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    find_type = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    height = models.FloatField(
-        blank=True, null=True,
-        help_text="provide_some"
+    bundesland = models.BigIntegerField(
+        blank=True, null=True
     )
-    find_gis_c = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    find_local = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    find_inven = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    phase_gis_field = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=254)
-    locus_id = models.CharField(
-        blank=True, null=True,
-        help_text="provide some",
-        max_length=50)
+    nuts2_name = models.CharField(
+        max_length=254, blank=True, null=True
+    )
+    nuts2_code = models.CharField(
+        max_length=254, blank=True, null=True
+    )
+    state_code = models.CharField(
+        max_length=254, blank=True, null=True
+    )
+    state_name = models.CharField(
+        max_length=254, blank=True, null=True
+    )
+    state_altn = models.CharField(
+        max_length=254, blank=True, null=True
+    )
     geom = models.MultiPolygonField(srid=4326)
 
     def __str__(self):
-        return "{}".format(self.orea_gis_i)
+        if self.nuts3_name and self.nuts2_name and self.cadcom_nam and self.state_name:
+            return "{} >> {} >> {} ({})".format(
+                self.cadcom_nam, self.nuts3_name, self.nuts2_name, self.state_name
+            )
+
+    def get_absolute_url(self):
+        return reverse(
+            'shapes:cadastralcommunity_detail', kwargs={'pk': self.id}
+        )
+
+    @classmethod
+    def get_listview_url(self):
+        return reverse('shapes:browse_cadastralcommunity')
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('shapes:cadastralcommunity_create')
+
+    def get_next(self):
+        next = None
+        if next:
+            return None
+        return False
+
+    def get_prev(self):
+        prev = None
+        if prev:
+            return None
+        return False
+
+    def get_geojson(self):
+        geojson = serialize(
+            'geojson', CadastralCommunity.objects.filter(id=self.id),
+            geometry_field='geom',
+            fields=('cadcom_nam', 'cadcom_num',)
+        )
+        return geojson
+
+
+# Auto-generated `LayerMapping` dictionary for CadastralCommunity model
+cadastralcommunity_mapping = {
+    'cadcom_num': 'CadCom_num',
+    'cadcom_nam': 'CadCom_nam',
+    'cadcom_alt': 'CadCom_alt',
+    'lau2_muni_field': 'LAU2_Muni_',
+    'lau2_mun_1': 'LAU2_Mun_1',
+    'polbez_num': 'PolBez_num',
+    'polbez_nam': 'PolBez_nam',
+    'nuts3_code': 'NUTS3_code',
+    'nuts3_name': 'NUTS3_name',
+    'bundesland': 'Bundesland',
+    'nuts2_name': 'NUTS2_name',
+    'nuts2_code': 'NUTS2_code',
+    'state_code': 'STATE_code',
+    'state_name': 'STATE_name',
+    'state_altn': 'STATE_altn',
+    'geom': 'MULTIPOLYGON',
+}

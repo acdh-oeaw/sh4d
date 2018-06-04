@@ -1,44 +1,23 @@
 from django.contrib.gis import admin
 from leaflet.admin import LeafletGeoAdmin
-from .models import TangibleObject, Bricks
+from .models import CadastralCommunity
 
 
-class BricksAdmin(LeafletGeoAdmin):
+class CadastralCommunityAdmin(LeafletGeoAdmin):
     list_display = (
-        'excavation',
-        'stratum_id',
-        'phase_id',
-        'brick_type',
-        'brick_mate',
+        'cadcom_nam',
+        'nuts2_name',
+        'nuts3_name',
     )
     list_filter = [
-        'excavation',
-        'phase_id',
-        'stratum_id',
+        'nuts2_name',
+        'nuts3_name',
     ]
     search_fields = [
-        'phase_id',
-        'find_type',
+        'cadcom_nam',
+        'nuts2_name',
+        'nuts3_name',
     ]
 
 
-class TangibleObjectAdmin(LeafletGeoAdmin):
-    list_display = (
-        'orea_gis_i',
-        'excavation',
-        'planum_gis',
-        'archaeolog',
-    )
-    list_filter = [
-        'excavation',
-        'planum_gis',
-        'stratum_gi',
-    ]
-    search_fields = [
-        'phase_id',
-        'find_type',
-    ]
-
-
-admin.site.register(TangibleObject, TangibleObjectAdmin)
-admin.site.register(Bricks, BricksAdmin)
+admin.site.register(CadastralCommunity, CadastralCommunityAdmin)
